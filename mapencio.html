@@ -1,0 +1,297 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+   html { height: 100% }
+   body { height: 100%; margin: 0; padding: 0 }
+   #map-canvas { height: 100% }
+</style>
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgLPzACxVB-dlW4c5v23Mff1FdUy-7yM&sensor=true">
+</script>
+<script type="text/javascript">
+   function initialize() 
+   {
+ 	  var mapOptions = {
+	  center: new google.maps.LatLng(52.5167, 13.3833),
+	  zoom: 10, 
+	  };
+var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+   }
+google.maps.event.addDomListener(window, 'load', initialize);
+ </script>
+ </head>
+ <body>
+ 	
+
+ <div id="map-canvas"></div>
+ </body>
+ </html>
+
+
+
+
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marcadores</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: -25.363, lng: 131.044};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatLng
+        });
+
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgLPzACxVB-dlW4c5v23Mff1FdUy-7yM&callback=initMap">
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple icons</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+      // Australia.
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: -33, lng: 151}
+        });
+
+        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var beachMarker = new google.maps.Marker({
+          position: {lat: -33.890, lng: 151.274},
+          map: map,
+          icon: image
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgLPzACxVB-dlW4c5v23Mff1FdUy-7yM&callback=initMap">
+    </script>
+  </body>
+</html>
+
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 70%;
+        width: 70%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+  <div class="#">sasa</div>
+</header>
+    <div id="map"></div>
+    <script>
+
+      // The following example creates complex markers to indicate beaches near
+      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+      // to the base of the flagpole.
+
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 21.161916, lng: -86.851543}
+        });
+
+
+
+        setMarkers(map);
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Estas aqui.');
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: El servicio de Geolocalizacion falló.' :
+                              'Error: Tu navegador no soporta la geolocalización.');
+      }
+
+      // Data for the markers consisting of a name, a LatLng and a zIndex for the
+      // order in which these markers should display on top of each other.
+      var beaches = [
+        ['Bondi Beach', 21.173539, -86.855385, 4],
+        ['Coogee Beach', 21.186360, -86.836156, 5],
+        ['Cronulla Beach', 21.169822, -86.861233, 3],
+        ['Manly Beach', 21.189541, -86.847737, 2],
+        ['Maroubra Beach', 21.185080, -86.862256, 1],
+        ['Bondi Beach', 21.169722, -86.886486, 6],
+        ['Coogee Beach', 21.147039, -86.895357, 7],
+        ['Cronulla Beach', 21.143786, -86.867983, 8],
+        ['Manly Beach', 21.162809, -86.863781, 9],
+        ['Maroubra Beach', 21.169392, -86.825761, 10],
+        ['Bondi Beach', 21.176072, -86.854815, 11],
+        ['Coogee Beach', 21.193892, -86.842406, 12],
+        ['Cronulla Beach', 21.200426, -86.853357, 13],
+        ['Manly Beach', 21.197074, -86.860488, 14],
+        ['Maroubra Beach', 21.202225, -86.849593, 15],
+      ];
+
+      function setMarkers(map) {
+        // Adds markers to the map.
+        // Marker sizes are expressed as a Size of X,Y where the origin of the image
+        // (0,0) is located in the top left of the image.
+        // Origins, anchor positions and coordinates of the marker increase in the X
+        // direction to the right and in the Y direction down.
+
+        var image = {
+          url: 'https://forum.ih8mud.com/styles/ih8mud/xenforo/mudsmilies/banana.gif',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(20, 32),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 32)
+        };
+        
+        // Shapes define the clickable region of the icon. The type defines an HTML
+        // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+        // The final coordinate closes the poly by connecting to the first coordinate.
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        for (var i = 0; i < beaches.length; i++) {
+          var beach = beaches[i];
+          var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+            map: map,
+            icon: image,
+            shape: shape,
+           // title: beach[0],
+            zIndex: beach[3]
+          });
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgLPzACxVB-dlW4c5v23Mff1FdUy-7yM&callback=initMap">
+    </script>
+  </body>
+</html>
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var cancun = {lat: 21.161916, lng:-86.851543};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: cancun
+        });
+        var marker = new google.maps.Marker({
+          position: cancun,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgLPzACxVB-dlW4c5v23Mff1FdUy-7yM&callback=initMap">
+    </script>
+  </body>
+</html>-->
